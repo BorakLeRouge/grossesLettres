@@ -467,6 +467,7 @@ async function grosseslettres() {
 		if (leType == 'COBOL') {
 			txt = txt.substr(0,9)
 		}
+		if(txt == '') { return txt ;}
 
 		// * * * On ajoute les lettres
 		for (let i in txt) {
@@ -483,6 +484,7 @@ async function grosseslettres() {
 
 		// * * * Message final
 		if(leType == 'COBOL') {
+			// * * * Commentaires en langage COBOL
 			let res = '      *===============================================================' + "\r\n"
 		         	+ '      * ' + resultat[0].trimEnd() + "\r\n" 
 		         	+ '      * ' + resultat[1].trimEnd() + "\r\n" 
@@ -494,7 +496,13 @@ async function grosseslettres() {
 					+ '      * * * ' + leTexte.trim() + "\r\n"  ;
 			return res ;
 		} else {
-			let deb = '' ;
+			// * * * Calcul espace devant commentaire
+			let patt = /(\s*).*/ ;
+			let deb  = leTexte.match(patt) ; 
+			if (deb == undefined || deb == null) { deb = '' ; }
+			else { deb = deb[1];
+			}
+			// * * * Préparation commentaire GL
 			let res = deb + '// ' +('=').repeat(resultat[0].length + 1 ) + "\r\n" 
 			        + deb + '// ' + resultat[0].trimEnd() + "\r\n" 
 			        + deb + '// ' + resultat[1].trimEnd() + "\r\n" 
@@ -527,11 +535,12 @@ async function grosseslettres() {
 	let newTexte = await transform(leTexte, leType) ;
 
 	// * * * Mise en place du nouveau texte
-	let editor = vscode.window.activeTextEditor;
-    editor.edit(builder => {
-        builder.replace(posit, newTexte);
-    });
-
+	if (newTexte != '') {
+		let editor = vscode.window.activeTextEditor;
+		editor.edit(builder => {
+			builder.replace(posit, newTexte);
+		});
+	}
 } 
 
 
