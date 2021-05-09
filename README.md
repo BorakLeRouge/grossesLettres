@@ -2,7 +2,7 @@
 
 Le but est simplement de générer des commentaires en grosses lettres, qui sont facilement visibles dans la mini-map VS-Code.
 
-Le fonctionnement est simple, vous écrivez un texte et vous appelez le menu contextuel `Grosses Lettres` et votre texte est rémplacé par un commentaire en grosses lettres.
+Le fonctionnement est simple, vous écrivez un texte et vous appelez le menu contextuel `Grosses Lettres` et votre texte est remplacé par un commentaire en grosses lettres.
 
 Exemple :
 ```
@@ -18,6 +18,10 @@ Exemple :
 ```
 
 ## Release Notes
+
+### 0.1.1
+
+Décalage du commentaire par rapport à la saisie.
 
 ### 0.1.0
 
